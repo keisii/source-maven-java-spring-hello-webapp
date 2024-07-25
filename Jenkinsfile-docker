@@ -41,8 +41,8 @@ pipeline {
       agent any
       steps {
         withDockerRegistry(credentialsId: 'docker-hub-token', url: 'https://index.docker.io/v1/') {
-          sh 'docker image push myfrecklekitty/webapp:$BUILD_NUMBER'
-          sh 'docker image push myfrecklekitty/webapp:latest'
+          sh 'docker image push myfrecklekitty/webapp:hello-world:$BUILD_NUMBER'
+          sh 'docker image push myfrecklekitty/webapp:hello-world:latest'
         }
       }
     }
