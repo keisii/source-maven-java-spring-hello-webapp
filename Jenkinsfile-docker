@@ -33,16 +33,16 @@ pipeline {
     stage('Tag Docker Image') {
       agent any
       steps {
-        sh 'docker image tag webapp:hello-world myfrecklekitty/webapp:hello-world:$BUILD_NUMBER'
-        sh 'docker image tag webapp:hello-world myfrecklekitty/webapp:hello-world:latest'
+        sh 'docker image tag webapp:hello-world myfrecklekitty/webapp:$BUILD_NUMBER'
+        sh 'docker image tag webapp:hello-world myfrecklekitty/webapp:latest'
       }
     }
     stage('Publish Docker Image') {
       agent any
       steps {
         withDockerRegistry(credentialsId: 'docker-hub-token', url: 'https://index.docker.io/v1/') {
-          sh 'docker image push myfrecklekitty/webapp:hello-world:$BUILD_NUMBER'
-          sh 'docker image push myfrecklekitty/webapp:hello-world:latest'
+          sh 'docker image push myfrecklekitty/webapp:$BUILD_NUMBER'
+          sh 'docker image push myfrecklekitty/webapp:latest'
         }
       }
     }
