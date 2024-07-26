@@ -1,0 +1,13 @@
+- name: Playbook Deploy webapp Container
+  hosts: localhost
+  connection: local
+  
+  tasks:
+  - name: Create & Start Container
+    docker_container:
+      name: myweb
+      image: "myfrecklekitty/myweb:{{ lookup('env','BUILD_NUMBER') }}"
+      state: started
+      ports:
+      - "80:8080"
+
